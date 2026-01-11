@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cipher Simulation</title>
+</head>
+<style>
+    h1{
+        margin-left: 50px; 
+    }
+    div {
+        background-color: white;
+        margin-left: 50px; margin-bottom: 50px; margin-right: 50px;
+        text-align: center;
+        padding: 50px; height: 530px; padding-top: 10px;
+    }
+    h3 {
+        display: flex; justify-content: flex-end;
+        gap: 50px; padding-right: 30px; margin-bottom: 50px;
+    }
+</style>
+
+<body style="background-color: rgb(212, 255, 254);">
+    <h1>Caesar Cipher Simulation</h1>
+    <div>
+        <h3>
+            <a href="CaeserCipher.html" style="text-decoration: none;"><span>Caesar Cipher</span></a>
+            <a href="MultiplicativeCipher.html" style="text-decoration: none;"><span>Multiplicative Cipher</span></a>
+        </h3>
+
+        <label>Enter Text</label>
+        <input type="text" id="text" placeholder="Enter message" style="padding:8px; width:220px; border-radius:6px; border:1px solid #aaa;"><br><br>
+
+        <label>Key Value</label>
+        <input type="number" id="shift" placeholder="e.g. 3" style="padding:8px; width:220px; border-radius:6px; border:1px solid #aaa;"><br><br>
+
+        <button onclick="encrypt()" style="padding:8px 20px; border-radius:15px; border:2px solid rgb(134, 215, 214); background:rgb(212, 255, 254); color:black; cursor:pointer; margin-left:10px;">
+            Encrypt
+        </button>
+
+        <button onclick="decrypt()" style="padding:8px 20px; border-radius:15px; border:2px solid rgb(134, 215, 214); background:rgb(212, 255, 254); color:black; cursor:pointer; margin-left:10px;">
+            Decrypt
+        </button>
+
+        <h4 style="margin-top:25px;">Result:</h4>
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+        function encrypt() {
+            let text = document.getElementById("text").value.toUpperCase();
+            let shift = parseInt(document.getElementById("shift").value);
+            let result = "";
+
+            for (let i = 0; i < text.length; i++) {
+                let char = text.charCodeAt(i);
+
+                if (char >= 65 && char <= 90) {
+                    result += String.fromCharCode(((char - 65 + shift) % 26) + 65);
+                } else {
+                    result += text[i];
+                }
+            }
+
+            document.getElementById("result").innerText = result;
+        }
+
+        function decrypt() {
+            let text = document.getElementById("text").value.toUpperCase();
+            let shift = parseInt(document.getElementById("shift").value);
+            let result = "";
+
+            for (let i = 0; i < text.length; i++) {
+                let char = text.charCodeAt(i);
+
+                if (char >= 65 && char <= 90) {
+                    result += String.fromCharCode(((char - 65 - shift + 26) % 26) + 65);
+                } else {
+                    result += text[i];
+                }
+            }
+
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>
